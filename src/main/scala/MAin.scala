@@ -65,8 +65,11 @@ def main(args: Array[String]): Unit = {
         }
 
         def deletebyId(m: Int) = {
-          val del = data.withColumn("nom", col("nom")).filter("id!=" + 13).show()
-
+          val del = data.withColumn("nom", col("nom")).filter("id!=" + 13)
+          del.show()
+          del.write
+            .mode(SaveMode.Overwrite)
+            .csv("data_fin")
         }
 //      case _ =>
 //        exit(1)
