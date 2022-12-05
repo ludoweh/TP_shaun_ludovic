@@ -34,6 +34,7 @@ def main(args: Array[String]): Unit = {
           )
 
         val data: DataFrame = sparkSession.read.option("header", true).csv("data")
+        //spark.read.csv(hdfs://192.168.1.110:8010/datashaunludovic.csv)
         val ft = data.filter("id=12")
         //data.printSchema()
 
