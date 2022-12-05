@@ -43,7 +43,7 @@ def main(args: Array[String]): Unit = {
 
         def hashUP(): Unit = {
           //val up = data.withColumn("hash",hash(data.col("nom"),data.col("prenom"),data.col("adresse"))).show()
-          val nomup = data.withColumn("nohash", hash(data.col("nom")))
+          val nomup = data.withColumn("nhash", hash(data.col("nom")))
           val prenomup = data.withColumn("phash", hash(data.col("prenom")))
           val adresseup = data.withColumn("ahash", hash(data.col("adresse")))
 
