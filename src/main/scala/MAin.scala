@@ -2,7 +2,7 @@ import io.netty.handler.codec.smtp.SmtpRequests.data
 import org.apache.spark
 import org.apache.spark.sql.functions.{col, hash}
 import org.apache.spark.sql.types.{ByteType, DateType, IntegerType, StringType, StructField, StructType}
-import org.apache.spark.sql.{DataFrame, SparkSession}
+import org.apache.spark.sql.{DataFrame, SaveMode, SparkSession}
 import scopt.OParser
 
 
@@ -60,7 +60,11 @@ def main(args: Array[String]): Unit = {
           val trans32 = trans31.withColumnRenamed("date", "datea")
           val trans3 = trans2.join(trans32, data("id") === trans32("ida"), "inner")
 
-          val trans4 = trans3.select("id", "nhash", "phash", "ahash", "date").show()
+          val trans4 = trans3.select("id", "nhash", "phash", "ahash", "date")
+          trans4.show()
+          trans4.write
+            .mode(SaveMode.Overwrite)
+            .csv("hash_fin")
 
         }
 
